@@ -39,7 +39,6 @@ class Computer(pygame.sprite.Sprite):
         self.rect.center = (580, 280)
         self.dy = 0
     def update(self):
-        self.dy = 0
         if ball.rect.top >= 565:
             self.dy = 3
         if ball.rect.bottom <= 550:
@@ -84,7 +83,11 @@ def game():
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 keepGoing = False
-
+        computer.dy = 0
+        if ball.rect.top >= 565:
+            computer.dy = 3
+        if ball.rect.bottom <= 550:
+            computer.dy = -3
         hitPaddles = pygame.sprite.spritecollide(ball, objectSprites, False)
         if hitPaddles:
             ball.dy *= -1
